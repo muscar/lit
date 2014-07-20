@@ -11,8 +11,12 @@ format as ab argument and the path to the source of your file, e.g.
 
     lit -f html samples/hello.md > samples/hello.html
 
-to generate HTML output. The supported formats are `md` for Markdown, `html`
-for HTML and `code` to extract the code blocks from the document.
+to generate HTML output. The supported formats are `html` for HTML and `code`
+to extract the code blocks from the document.
+
+You can also specify the CSS class for highlighted blocks via the `-c` switch:
+
+    lit -f html -c listing samples/hello.md > samples/hello.html
 
 ## Installation
 

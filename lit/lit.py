@@ -4,6 +4,7 @@ import argparse
 import itertools as it
 import sys
 
+from lit import config
 from lit.lib import fragment
 from lit.lib.document import Document
 
@@ -15,8 +16,8 @@ def read_fragment(input_file):
         return frag
 
 
-def read(input_file):
-    doc = Document()
+def read(input_file, css_class_name):
+    doc = Document(css_class_name)
     fragment = read_fragment(input_file)
     while len(fragment) > 0:
         doc.append(fragment)
@@ -27,12 +28,13 @@ def read(input_file):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--format', help='the output format', choices=['html', 'code'])
+    parser.add_argument('-c', '--css-class-name', help='the CSS class name for highlighted blocks', default=config.CSS_CLASS_NAME)
     parser.add_argument('file', help='the markdown source file')
 
     args = parser.parse_args()
 
     with open(args.file, 'r') as input_file:
-        doc = read(input_file)
+        doc = read(input_file, args.css_class_name)
         print(getattr(doc, args.format)())
 
 

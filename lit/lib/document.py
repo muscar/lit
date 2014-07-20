@@ -7,8 +7,9 @@ from lit.lib.fragment import CodeFragment
 
 
 class Document(object):
-    def __init__(self):
+    def __init__(self, css_class_name):
         self.fragments = []
+        self.markdown_exts = ['fenced_code', 'codehilite(css_class={0})'.format(css_class_name)]
 
     def append(self, fragment):
         self.fragments.append(fragment)
@@ -18,7 +19,7 @@ class Document(object):
 
     def html(self):
         template = config.TEMPLATE_ENV.get_template(config.DOCUMENT_TEMPLATE)
-        body = markdown(self._md(), extensions=config.MARKDOWN_EXTENSIONS)
+        body = markdown(self._md(), extensions=self.markdown_exts)
         return template.render(body=body)
 
     def code(self):
