@@ -14,6 +14,13 @@ format as ab argument and the path to the source of your file, e.g.
 to generate HTML output. The supported formats are `md` for Markdown, `html`
 for HTML and `code` to extract the code blocks from the document.
 
+## Installation
+
+    $ git clone https://github.com/muscar/lit.git
+    $ cd lit
+    $ python setup.py sdist
+    $ pip install dist/lit-0.1.tar.gz
+
 ## Dependencies
 
 The tool uses [Jinja2](http://jinja.pocoo.org/docs/ "Jinja2") for templating
