@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
 
 import argparse
+import itertools as it
 import sys
 
-from lib.fragment import FragmentMeta
-from lib.document import Document
+from lit.lib import fragment
+from lit.lib.document import Document
+
+
+def read_fragment(input_file):
+    with fragment.from_line(input_file.readline()) as frag:
+        for line in it.takewhile(lambda line: not frag.isendmarker(line), input_file):
+            frag.append(line)
+        return frag
 
 
 def read(input_file):
     doc = Document()
-    fragment = FragmentMeta.make(input_file.readline())
-
-    for line in input_file:
-        if fragment.isendmarker(line):
-            doc.append(fragment.finalize())
-            fragment = FragmentMeta.make(input_file.readline())
-        else:
-            fragment.append(line)
-    else:
-        doc.append(fragment.finalize())
+    fragment = read_fragment(input_file)
+    while len(fragment) > 0:
+        doc.append(fragment)
+        fragment = read_fragment(input_file)
     return doc
 
 

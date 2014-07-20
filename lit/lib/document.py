@@ -2,9 +2,8 @@ import re
 
 from markdown import markdown
 
-from lib.fragment import CodeFragment
-
-import config
+from lit import config
+from lit.lib.fragment import CodeFragment
 
 
 class Document(object):

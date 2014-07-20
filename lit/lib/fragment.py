@@ -1,5 +1,7 @@
 import re
 
+from contextlib import contextmanager
+
 
 class FragmentMeta(type):
     registry = []
@@ -47,6 +49,9 @@ class Fragment(object):
         del self.acc
         return self
 
+    def __len__(self):
+        return len(self.text)
+
     def __str__(self):
         return self.text
 
@@ -72,3 +77,10 @@ class CodeFragment(Fragment, metaclass=FragmentMeta):
 
     def __repr__(self):
         return '```{0}\n{1}```'.format(self.language, super().__repr__())
+
+
+@contextmanager
+def from_line(line):
+    fragment = FragmentMeta.make(line)
+    yield fragment
+    fragment.finalize()
