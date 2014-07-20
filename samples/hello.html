@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="pygments.css">
+</head>
+<body>
+    <h1>Literate Python sample</h1>
+<p>We'll implement the <em>quicksort</em> algorithm. It's a <em>fast</em> sorting algorithm,
+with <code>O(N*log(N))</code> average time complexity.</p>
+<p>Let's start by writing a function to choose the pivot, called <code>choose</code>.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">choose</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;empty sequence&quot;</span>
+    <span class="k">return</span> <span class="n">sequence</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sequence</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+</pre></div>
+
+
+<p>Once we have a pivot, we can sort the smaller elements, the larger ones and
+finally place the pivot in place.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">l</span>
+
+    <span class="n">pivot</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">choose</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">smaller</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rest</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="n">larger</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rest</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sort</span><span class="p">(</span><span class="n">smaller</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">pivot</span><span class="p">]</span> <span class="o">+</span> <span class="n">sort</span><span class="p">(</span><span class="n">larger</span><span class="p">)</span>
+</pre></div>
+
+
+<p>And that's it. We can finally test it:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">sort</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</body>
+</html>
