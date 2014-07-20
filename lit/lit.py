@@ -16,8 +16,8 @@ def read_fragment(input_file):
         return frag
 
 
-def read(input_file, css_class_name):
-    doc = Document(css_class_name)
+def read(input_file, css_class_name, stylesheet):
+    doc = Document(css_class_name, stylesheet)
     fragment = read_fragment(input_file)
     while len(fragment) > 0:
         doc.append(fragment)
@@ -29,12 +29,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--format', help='the output format', choices=['html', 'code'])
     parser.add_argument('-c', '--css-class-name', help='the CSS class name for highlighted blocks', default=config.CSS_CLASS_NAME)
+    parser.add_argument('-s', '--stylesheet', help='either generate CSS inline (pass "inline") or the path to the CSS file to include', default="inline")
     parser.add_argument('file', help='the markdown source file')
 
     args = parser.parse_args()
 
     with open(args.file, 'r') as input_file:
-        doc = read(input_file, args.css_class_name)
+        doc = read(input_file, args.css_class_name, args.stylesheet)
         print(getattr(doc, args.format)())
 
 

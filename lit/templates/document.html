@@ -2,7 +2,13 @@
 <html>
 <head>
     <title>{{ title }}</title>
-    <link rel="stylesheet" type="text/css" href="pygments.css">
+    {% if stylesheet == "inline" %}
+    <style type="text/css">
+        {{ css }}
+    </style>
+    {% else %}
+    <link rel="stylesheet" type="text/css" href="{{ stylesheet }}">
+    {% endif %}
 </head>
 <body>
     {{ body }}
