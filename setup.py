@@ -35,8 +35,7 @@ setup(
     include_package_data = True,
     entry_points={
         'console_scripts': [
-            'lit=lit.lit:main',
-            'litd=lit.litd:main'
+            'lit=lit.lit:main'
         ],
     },
 )

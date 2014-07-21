@@ -12,6 +12,8 @@ TEMPLATE_ENV = Environment(loader=PackageLoader('lit', TEMPLATES_DIR))
 DOCUMENT_TEMPLATE='document.html'
 CSS_DEFAULT_STYLE_FILE='git.css'
 CSS_CLASS_NAME='highlight'
+KNOWN_FORMATS = set(['html', 'code'])
+
 
 
 def css_file_contents(path):

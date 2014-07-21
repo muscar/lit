@@ -18,6 +18,17 @@ You can also specify the CSS class for highlighted blocks via the `-c` switch:
 
     lit -f html -c listing samples/hello.md > samples/hello.html
 
+The `-s` flag allows you to choose of whether lit generates the CSS style
+inline in the head of the HTML document or if it uses an external file.
+
+    lit -f html -s inline samples/hello.md > samples/hello.html
+
+will generate the CSS definitions inline, while
+
+    lit -f html -s mystyle.css samples/hello.md > samples/hello.html
+
+will use the `mystyle.css` file.
+
 ## Installation
 
     $ git clone https://github.com/muscar/lit.git
