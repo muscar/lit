@@ -1,0 +1,7 @@
+# Project ideas
+
+* Add a `--watch` option to spawn a daemon that watches the local folder for
+changes and automatically invokes `lit` to generate HTML, source coe or both
+--also selectable by a switch.
+
+* Add options for the location of the generated HTML and source files.

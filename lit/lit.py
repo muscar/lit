@@ -29,7 +29,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--format', help='the output format', choices=['html', 'code'])
     parser.add_argument('-c', '--css-class-name', help='the CSS class name for highlighted blocks', default=config.CSS_CLASS_NAME)
-    parser.add_argument('-s', '--stylesheet', help='either generate CSS inline (pass "inline") or the path to the CSS file to include', default="inline")
+    parser.add_argument('-s', '--stylesheet', help='either generate CSS inline (pass "inline") or the path to the CSS file to include', default='inline')
     parser.add_argument('file', help='the markdown source file')
 
     args = parser.parse_args()

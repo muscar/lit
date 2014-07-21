@@ -31,11 +31,12 @@ setup(
 
     keywords='literate programming markdown html',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
-    install_requires=['jinja2', 'pygments', 'markdown'],
+    install_requires=['jinja2', 'pygments', 'markdown', 'watchdog', 'termcolor'],
     include_package_data = True,
     entry_points={
         'console_scripts': [
             'lit=lit.lit:main',
+            'litd=lit.litd:main'
         ],
     },
 )
