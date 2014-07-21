@@ -4,8 +4,6 @@ import argparse
 import itertools as it
 import os
 import sys
-import subprocess
-import termcolor
 import time
 
 from watchdog.observers import Observer
@@ -21,12 +19,12 @@ def is_literate_ext(ext):
 
 
 def code_file_ext(literate_ext):
-    assert(is_literate_ext(literate_ext))
     return literate_ext.replace('lit', '')
 
 
 def output_file_name(path, format):
     fullname, ext = os.path.splitext(path)
+    assert(is_literate_ext(ext))
     if format == 'html':
         return fullname + '.html'
     return fullname + code_file_ext(ext)
@@ -90,7 +88,7 @@ def main():
     parser.add_argument('-f', '--formats', help='the output format(s)', default='html')
     parser.add_argument('-c', '--css-class-name', help='the CSS class name for highlighted blocks', default=config.CSS_CLASS_NAME)
     parser.add_argument('-s', '--stylesheet', help='either generate CSS inline (pass "inline") or the path to the CSS file to include', default='inline')
-    parser.add_argument('file', help='the markdown source file')
+    parser.add_argument('file', help='the literate source file (.lit*, e.g. .litpy) or a directory to watch')
 
     args = parser.parse_args()
     formats = config.KNOWN_FORMATS & set(args.formats.split(','))
